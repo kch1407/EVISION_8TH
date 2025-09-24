@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>방명록</title>
+</head>
+<body>
+  <h1>방명록 시스템</h1>
+
+  <!-- 검색 폼 -->
+  <form action="/search" method="get">
+    <input type="text" name="q" placeholder="검색어 입력">
+    <button type="submit">검색</button>
+  </form>
+
+  <hr>
+
+  <h2>방명록 작성</h2>
+  <form action="/write" method="post">
+    이름: <input type="text" name="name"><br>
+    메시지:<br>
+    <textarea name="message" rows="4" cols="40"></textarea><br>
+    <button type="submit">저장</button>
+  </form>
+
+  <hr>
+
+  <h2>모든 방명록</h2>
+  {% for id, name, message in messages %}
+    <div style="border:1px solid #ccc; padding:8px; margin:8px 0;">
+      <strong>{{ name | safe }}</strong><br>
+      {{ message | safe }}
+    </div>
+  {% else %}
+    <p>작성된 방명록이 없습니다.</p>
+  {% endfor %}
+</body>
+</html>
